@@ -1,15 +1,16 @@
-name: CI
+name: Build npm package
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
     - name: checkout repo
       uses: actions/checkout@v1
-    - name: build using docker
-      run: |
-        source source.sh && npm i && npm run build
+    - name: set build env variables
+      run: source source.sh
+    - name: install node
+      run: npm i
+    - name: build app
+      run: npm run build
